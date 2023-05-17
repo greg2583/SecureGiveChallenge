@@ -1,0 +1,24 @@
+﻿@page
+@model User
+@{
+    ViewData["Title"] = "Create User";
+}
+
+<h1>@ViewData["Title"]</h1>
+<h2>Add User</h2>
+<form method="post">
+    <p>
+        <label asp-for="FirstName">Your First Name:</label>
+        <input asp-for="FirstName" />
+    </p>
+    <p>
+        <label asp-for="LastName">Your Last Name:</label>
+        <input asp-for="LastName" />
+    </p>    
+    <p>
+        <label asp-for="UserType">Choose User Type:</label>
+        <input type="radio" asp-for="UserType" value="E" />Editor
+        <input type="radio" asp-for="UserType" value="V" />Viewer
+    </p>
+    <p><button type="submit">Submit</button></p>
+</form>
