@@ -20,12 +20,8 @@
             <tr>
                 <td>@u.FirstName</td>
                 <td>@u.LastName</td>
-                <td>@u.UserType</td>                
-                <td>
-                    <form asp-route-userid="@u.UserId" asp-action="Update" method="post">
-                        <button type="submit">Edit User</button>
-                    </form>
-                </td>
+                <td>@u.UserType</td>                                
+                <td><a asp-action="Update" asp-route-userid="@u.UserId">Edit User</a></td>
                 <td>
                     <form asp-route-userid="@u.UserId" asp-action="Delete" method="post">
                         <button type="submit">Delete User</button>

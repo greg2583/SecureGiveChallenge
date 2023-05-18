@@ -33,21 +33,24 @@ namespace SecureGiveChallenge.Controllers
             }                
         }
 
-        public IActionResult Update(int ID)
+        public IActionResult Update(int UserId)
         {
-            User user = SampleData.UsersList.Where(k => k.UserId == ID).FirstOrDefault();
+            User user = SampleData.UsersList.Where(k => k.UserId == UserId).FirstOrDefault();
             return View(user);
         }
 
         [HttpPost]
-        public IActionResult Update(User user, int ID)
+        public IActionResult Update(User user, int UserId)
         {
             if (ModelState.IsValid)
             {
-                SampleData.UsersList.Where(k => k.UserId == ID).FirstOrDefault().FirstName = user.FirstName;
-                SampleData.UsersList.Where(k => k.UserId == ID).FirstOrDefault().LastName = user.LastName;
-                SampleData.UsersList.Where(k => k.UserId == ID).FirstOrDefault().UserType = user.UserType;
-
+                User? foundUser = SampleData.UsersList.FirstOrDefault(k => k.UserId == UserId);
+                if (foundUser != null)
+                {
+                    foundUser.FirstName = user.FirstName;
+                    foundUser.LastName = user.LastName;
+                    foundUser.UserType = user.UserType;
+                }               
                 return RedirectToAction("Index");
             }
             else
@@ -59,10 +62,14 @@ namespace SecureGiveChallenge.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(int ID)
+        public IActionResult Delete(int UserId)
         {
-            User user = SampleData.UsersList.Where(k => k.UserId == ID).FirstOrDefault();
-            SampleData.Delete(user);            
+            
+            User? user = SampleData.UsersList.FirstOrDefault(k => k.UserId == UserId);
+            if (user != null)
+            {
+                SampleData.Delete(user);
+            }            
             return RedirectToAction("Index");
         }
     }
