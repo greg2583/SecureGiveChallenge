@@ -44,13 +44,17 @@ namespace SecureGiveChallenge.Controllers
         {
             if (ModelState.IsValid)
             {
-                User? foundUser = SampleData.UsersList.FirstOrDefault(k => k.UserId == UserId);
-                if (foundUser != null)
+                try
+                {                    
+                    SampleData.Update(user, UserId);
+                }
+                catch (Exception ex)
                 {
-                    foundUser.FirstName = user.FirstName;
-                    foundUser.LastName = user.LastName;
-                    foundUser.UserType = user.UserType;
-                }               
+                    if (ex.InnerException is NullReferenceException)
+                    {
+                        return View();
+                    }                    
+                }
                 return RedirectToAction("Index");
             }
             else

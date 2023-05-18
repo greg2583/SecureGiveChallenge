@@ -14,7 +14,7 @@ namespace SecureGiveChallenge.Models
 		{		
 			if (usersList.Count == 0)
 			{
-				newUser.UserId = 0;
+				newUser.UserId = 1;
 			}
 			else
 			{
@@ -25,7 +25,28 @@ namespace SecureGiveChallenge.Models
 		}
         public static void Delete(User user)
         {
-            usersList.Remove(user);
+			try
+			{
+				usersList.Remove(user);
+			}
+			catch (Exception ex)
+			{
+
+			}
+            
+        }
+
+		public static void Update(User user, int UserId)
+		{
+			try
+			{
+                User? foundUser = SampleData.UsersList.FirstOrDefault(k => k.UserId == UserId);
+                foundUser.FirstName = user.FirstName;
+                foundUser.LastName = user.LastName;
+                foundUser.UserType = user.UserType;
+            }
+			catch (Exception ex) { }
+            
         }
     }
 }
