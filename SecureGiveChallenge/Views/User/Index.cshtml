@@ -10,6 +10,8 @@
             <th>First Name</th>
             <th>Last Name</th>
             <th>User Type</th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -18,7 +20,17 @@
             <tr>
                 <td>@u.FirstName</td>
                 <td>@u.LastName</td>
-                <td>@u.UserType</td>
+                <td>@u.UserType</td>                
+                <td>
+                    <form asp-route-userid="@u.UserId" asp-action="Update" method="post">
+                        <button type="submit">Edit User</button>
+                    </form>
+                </td>
+                <td>
+                    <form asp-route-userid="@u.UserId" asp-action="Delete" method="post">
+                        <button type="submit">Delete User</button>
+                    </form>
+                </td>
             </tr>
         }
     </tbody>
